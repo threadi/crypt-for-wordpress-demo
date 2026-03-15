@@ -24,7 +24,7 @@ jobs:
         run: vendor/bin/phpstan analyse
 
       - name: PHP Compatibility check
-        run: vendor/bin/phpcs -p src --standard=PHPCompatibilityWP
+        run: vendor/bin/phpcs -p crypt-for-wordpress-demo.php --standard=PHPCompatibilityWP
 
       - name: Run WordPress Coding Standard fixes
         run: vendor/bin/phpcbf --standard=ruleset.xml .
