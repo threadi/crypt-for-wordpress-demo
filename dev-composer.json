@@ -1,0 +1,14 @@
+{
+  "repositories": [
+    {
+      "type": "path",
+      "url": "../../../crypt-for-wordpress",
+      "options": {
+        "symlink": true
+      }
+    }
+  ],
+  "require": {
+    "threadi/crypt-for-wordpress": "*"
+  }
+}
