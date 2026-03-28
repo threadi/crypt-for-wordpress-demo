@@ -52,10 +52,8 @@ add_action( 'wp_dashboard_setup', 'cfwd_add_dashboard_widgets' );
  */
 function cfwd_dashboard(): void {
 	// configure the crypt object.
-	$crypt = new Crypt();
-	$crypt->set_slug( 'crypt-for-wordpress-demo' ); // plugin slug.
-	$crypt->set_plugin_file( __FILE__ ); // plugin file.
-	$crypt->set_method_config(
+	$crypt = new Crypt( __FILE__);
+	$crypt->set_config(
 		array(
 			'openssl' => array(
 				'hash_type'        => 'hash_pbkdf2',
