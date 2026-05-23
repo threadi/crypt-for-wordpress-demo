@@ -57,8 +57,6 @@ function cfwd_dashboard(): void {
 	$crypt = new Crypt( __FILE__);
 	$crypt->set_config(
 		array(
-            'force_place' => 'customfile',
-            'custom_file_path' => '/var/www/clients/client1/web1/tmp/crypt_keys.php',
 			'openssl' => array(
 				'hash_type'        => 'hash_pbkdf2',
 				'hash_algorithm'   => 'sha256',
