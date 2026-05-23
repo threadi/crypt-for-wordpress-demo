@@ -18,6 +18,8 @@
 defined( 'ABSPATH' ) || exit;
 
 use CryptForWordPress\Crypt;
+use CryptForWordPress\Method_Base;
+use CryptForWordPress\Place_Base;
 
 // do nothing if the PHP version is not 8.0 or newer.
 if ( PHP_VERSION_ID < 80000 ) { // @phpstan-ignore smaller.alwaysFalse
@@ -55,6 +57,8 @@ function cfwd_dashboard(): void {
 	$crypt = new Crypt( __FILE__);
 	$crypt->set_config(
 		array(
+            'force_place' => 'customfile',
+            'custom_file_path' => '/var/www/clients/client1/web1/tmp/crypt_keys.php',
 			'openssl' => array(
 				'hash_type'        => 'hash_pbkdf2',
 				'hash_algorithm'   => 'sha256',
@@ -66,16 +70,25 @@ function cfwd_dashboard(): void {
 		)
 	);
 
+    // get the place.
+    $place = $crypt->get_place();
+
+    // bail if no place could be loaded.
+    if( ! $place instanceof Place_Base ) {
+        return;
+    }
+
 	// get the method.
 	$method = $crypt->get_method();
 
 	// bail if no method could be loaded.
-	if ( ! $method ) {
+	if ( ! $method instanceof Method_Base ) {
 		echo '<strong>' . esc_html__( 'Could not load any method to encrypt strings!', 'crypt-for-wordpress-demo' ) . '</strong>';
 		return;
 	}
 
 	// show the example.
+    echo '<strong>' . esc_html__( 'Used place for the key:', 'crypt-for-wordpress-demo' ) . '</strong> <code>' . esc_html( $place->get_name() ) . '</code><br>';
 	echo '<strong>' . esc_html__( 'Used method:', 'crypt-for-wordpress-demo' ) . '</strong> <code>' . esc_html( $method->get_name() ) . '</code><br>';
 	$original = __( 'Hello World!', 'crypt-for-wordpress-demo' );
 	echo '<strong>' . esc_html__( 'Original:', 'crypt-for-wordpress-demo' ) . '</strong> <code>' . esc_html( $original ) . '</code><br>';
