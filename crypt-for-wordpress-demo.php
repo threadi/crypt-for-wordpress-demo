@@ -93,5 +93,14 @@ function cfwd_dashboard(): void {
 	$encrypted = $crypt->encrypt( $original );
 	echo '<strong>' . esc_html__( 'Encrypted:', 'crypt-for-wordpress-demo' ) . '</strong> <code>' . esc_html( $encrypted ) . '</code><br>';
 	$decrypted = $crypt->decrypt( $encrypted );
-	echo '<strong>' . esc_html__( 'Decrypted:', 'crypt-for-wordpress-demo' ) . '</strong> <code>' . esc_html( $decrypted ) . '</code>';
+	echo '<strong>' . esc_html__( 'Decrypted:', 'crypt-for-wordpress-demo' ) . '</strong> <code>' . esc_html( $decrypted ) . '</code><br>';
+    $has_errors = $crypt->has_errors();
+    echo '<strong>' . esc_html__( 'Errors:', 'crypt-for-wordpress-demo' ) . '</strong> <code>' . ( $has_errors ? esc_html__( 'Yes', 'crypt-for-wordpress-demo' ) : esc_html__( 'No', 'crypt-for-wordpress-demo' ) ). '</code><br>';
+    if( $has_errors ) {
+        foreach( $crypt->get_errors() as $error ) {
+            foreach( $error as $key => $value ) {
+                echo '<strong>' . $key . '</strong> ' . implode( '', $value ) . '<br>';
+            }
+        }
+    }
 }
