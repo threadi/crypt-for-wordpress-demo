@@ -54,7 +54,7 @@ add_action( 'wp_dashboard_setup', 'cfwd_add_dashboard_widgets' );
  */
 function cfwd_dashboard(): void {
 	// configure the crypt object.
-	$crypt = new Crypt( __FILE__);
+	$crypt = new Crypt( __FILE__ );
 	$crypt->set_config(
 		array(
 			'openssl' => array(
@@ -68,13 +68,13 @@ function cfwd_dashboard(): void {
 		)
 	);
 
-    // get the place.
-    $place = $crypt->get_place();
+	// get the place.
+	$place = $crypt->get_place();
 
-    // bail if no place could be loaded.
-    if( ! $place instanceof Place_Base ) {
-        return;
-    }
+	// bail if no place could be loaded.
+	if ( ! $place instanceof Place_Base ) {
+		return;
+	}
 
 	// get the method.
 	$method = $crypt->get_method();
@@ -86,7 +86,7 @@ function cfwd_dashboard(): void {
 	}
 
 	// show the example.
-    echo '<strong>' . esc_html__( 'Used place for the key:', 'crypt-for-wordpress-demo' ) . '</strong> <code>' . esc_html( $place->get_name() ) . '</code><br>';
+	echo '<strong>' . esc_html__( 'Used place for the key:', 'crypt-for-wordpress-demo' ) . '</strong> <code>' . esc_html( $place->get_name() ) . '</code><br>';
 	echo '<strong>' . esc_html__( 'Used method:', 'crypt-for-wordpress-demo' ) . '</strong> <code>' . esc_html( $method->get_name() ) . '</code><br>';
 	$original = __( 'Hello World!', 'crypt-for-wordpress-demo' );
 	echo '<strong>' . esc_html__( 'Original:', 'crypt-for-wordpress-demo' ) . '</strong> <code>' . esc_html( $original ) . '</code><br>';
@@ -94,13 +94,16 @@ function cfwd_dashboard(): void {
 	echo '<strong>' . esc_html__( 'Encrypted:', 'crypt-for-wordpress-demo' ) . '</strong> <code>' . esc_html( $encrypted ) . '</code><br>';
 	$decrypted = $crypt->decrypt( $encrypted );
 	echo '<strong>' . esc_html__( 'Decrypted:', 'crypt-for-wordpress-demo' ) . '</strong> <code>' . esc_html( $decrypted ) . '</code><br>';
-    $has_errors = $crypt->has_errors();
-    echo '<strong>' . esc_html__( 'Errors:', 'crypt-for-wordpress-demo' ) . '</strong> <code>' . ( $has_errors ? esc_html__( 'Yes', 'crypt-for-wordpress-demo' ) : esc_html__( 'No', 'crypt-for-wordpress-demo' ) ). '</code><br>';
-    if( $has_errors ) {
-        foreach( $crypt->get_errors() as $error ) {
-            foreach( $error as $key => $value ) {
-                echo '<strong>' . $key . '</strong> ' . implode( '', $value ) . '<br>';
-            }
-        }
-    }
+	$has_errors = $crypt->has_errors();
+	echo '<strong>' . esc_html__( 'Errors:', 'crypt-for-wordpress-demo' ) . '</strong> <code>' . ( $has_errors ? esc_html__( 'Yes', 'crypt-for-wordpress-demo' ) : esc_html__( 'No', 'crypt-for-wordpress-demo' ) ) . '</code><br>';
+	if ( $has_errors ) {
+		$errors = $crypt->get_errors();
+		if ( $errors instanceof WP_Error ) {
+			foreach ( $errors->errors as $error ) {
+				foreach ( $error as $key => $value ) {
+					echo '<strong>' . esc_html( $key ) . '</strong> ' . wp_kses_post( implode( '', $value ) ) . '<br>';
+				}
+			}
+		}
+	}
 }
