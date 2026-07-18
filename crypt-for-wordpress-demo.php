@@ -99,10 +99,8 @@ function cfwd_dashboard(): void {
 	if ( $has_errors ) {
 		$errors = $crypt->get_errors();
 		if ( $errors instanceof WP_Error ) {
-			foreach ( $errors->errors as $error ) {
-				foreach ( $error as $key => $value ) {
-					echo '<strong>' . esc_html( $key ) . '</strong> ' . wp_kses_post( implode( '', $value ) ) . '<br>';
-				}
+			foreach ( $errors->errors as $key => $value ) {
+				echo '<strong>' . esc_html( $key ) . '</strong> ' . wp_kses_post( implode( '', (array) $value ) ) . '<br>';
 			}
 		}
 	}
