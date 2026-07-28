@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Prepare build
         run: |
@@ -36,6 +36,24 @@ jobs:
 
       - uses: anchore/sbom-action@v0
 
+      - name: Set version number 1
+        uses: richardrigutins/replace-in-files@v3
+        with:
+          files: 'crypt-for-wordpress-demo.php'
+          search-text: '@@VersionNumber@@'
+          replacement-text: ${{ github.ref_name }}
+
+      - name: Set version number 2
+        uses: richardrigutins/replace-in-files@v3
+        with:
+          files: 'readme.txt'
+          search-text: '@@VersionNumber@@'
+          replacement-text: ${{ github.ref_name }}
+
+      - name: Clean up directory
+        run: |
+          rm phpcs.xml.dist
+
       - name: Run PCP check
         uses: wordpress/plugin-check-action@v1
         with:
@@ -57,7 +75,7 @@ jobs:
           cp ${{ github.event.repository.name }}.zip ${{ github.event.repository.name }}/
 
       - name: Create Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         if: startsWith(github.ref, 'refs/tags/')
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
