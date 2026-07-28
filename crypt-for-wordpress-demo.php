@@ -4,7 +4,7 @@
  * Description:       This plugin demonstrates the usage of the composer package threadi/crypt.
  * Requires at least: 6.0
  * Requires PHP:      8.0
- * Version:           1.0.0
+ * Version:           1.0.3
  * Author:            Thomas Zwirner
  * Author URI:        https://www.thomaszwirner.de
  * License:           GPL-2.0-or-later
