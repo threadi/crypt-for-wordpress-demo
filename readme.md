@@ -32,11 +32,11 @@ This repository contains a WordPress demo plugin for [Crypt for WordPress](https
 
 ### Run
 
-`vendor/bin/phpcs --standard=ruleset.xml .`
+`vendor/bin/phpcs .`
 
 ### Repair
 
-`vendor/bin/phpcbf --standard=ruleset.xml .`
+`vendor/bin/phpcbf .`
 
 ## Check for WordPress VIP Coding Standards
 

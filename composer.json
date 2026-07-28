@@ -1,6 +1,6 @@
 {
     "name": "threadi/crypt-demo",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "config": {
       "allow-plugins": {
         "dealerdirect/phpcodesniffer-composer-installer": true,
@@ -23,6 +23,6 @@
       "dealerdirect/phpcodesniffer-composer-installer": "^1.2"
     },
     "require": {
-      "threadi/crypt-for-wordpress": "*"
+      "threadi/crypt-for-wordpress": "^2.0.1"
     }
 }
