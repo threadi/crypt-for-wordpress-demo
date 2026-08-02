@@ -3,7 +3,7 @@
  * Plugin Name:       Crypt for WordPress Demo
  * Description:       This plugin demonstrates the usage of the composer package threadi/crypt.
  * Requires at least: 6.0
- * Requires PHP:      8.0
+ * Requires PHP:      8.2
  * Version:           1.0.3
  * Author:            Thomas Zwirner
  * Author URI:        https://www.thomaszwirner.de
@@ -21,8 +21,8 @@ use CryptForWordPress\Crypt;
 use CryptForWordPress\Method_Base;
 use CryptForWordPress\Place_Base;
 
-// do nothing if the PHP version is not 8.0 or newer.
-if ( PHP_VERSION_ID < 80000 ) { // @phpstan-ignore smaller.alwaysFalse
+// do nothing if the PHP version is not 8.2 or newer.
+if ( PHP_VERSION_ID < 80200 ) { // @phpstan-ignore smaller.alwaysFalse
 	return;
 }
 
