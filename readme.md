@@ -2,7 +2,9 @@
 
 This repository contains a WordPress demo plugin for [Crypt for WordPress](https://github.com/threadi/crypt-for-wordpress). It is intended to show the possibilities of the plugin. It is not intended to be used actively in a productive system. You are welcome to use the programming as a template for your own use of Crypt for WordPress.
 
-## Use the demo
+[**Start demo in playground**](https://playground.wordpress.net/?blueprint-url=https://raw.githubusercontent.com/threadi/crypt-for-wordpress-demo/master/.github/blueprints/demo.json)
+
+## Use the demo in your project
 
 1. Download the actual release ZIP (not the source ZIP).
 2. Install it in your WordPress and activate it.
